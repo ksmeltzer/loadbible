@@ -1,0 +1,1 @@
+{ "indexes" : [ { "v" : 1, "key" : { "_id" : 1 }, "name" : "_id_", "ns" : "reloader.gun.manufacturers" }, { "v" : 1, "unique" : true, "key" : { "name" : 1 }, "name" : "name_1", "ns" : "reloader.gun.manufacturers", "background" : true, "safe" : null } ] }
