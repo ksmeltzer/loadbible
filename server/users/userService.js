@@ -60,3 +60,8 @@ var userModel = require('./userModel.js');
 
     }
 
+    module.exports.getAuthentication = function(req, res)
+    {
+        res.send("");
+    }
+

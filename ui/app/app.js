@@ -2,8 +2,8 @@
 
 var app = angular.module('myApp', ['ngRoute', 'smart-table', 'ui.bootstrap', 'validation.match', 'http-auth-interceptor']);
 
-app.config(['$routeProvider',
-           function ($routeProvider){
+app.config(['$routeProvider', '$httpProvider',
+           function ($routeProvider, $httpProvider){
         $routeProvider.when('/welcome', {
             templateUrl: '/app/welcomeView.html'
         });
@@ -14,13 +14,14 @@ app.config(['$routeProvider',
             redirectTo: '/welcome'
         });
 
-           // $rootScope.$on('event:auth-loginRequired', function(){
-              //loginService.showLogin();
-            //});
+
+    $httpProvider.interceptors.push('authInterceptor');
 
             }
 
            ]);
+
+
 
 
 app.run(['$rootScope', 'loginService', function($rootScope, loginService){
@@ -28,5 +29,17 @@ app.run(['$rootScope', 'loginService', function($rootScope, loginService){
     $rootScope.$on('event:auth-loginRequired', function(){
               loginService.showLogin();
             });
+}]);
+
+
+app.factory('authInterceptor', ['$rootScope', function($rootScope) {
+    return {
+        request: function($config) {
+            var auth = $rootScope.credentials;
+            $config.headers['x-username'] = auth.username;
+             $config.headers['x-token'] = auth.token;
+            return $config;
+        }
+    };
 }]);
 

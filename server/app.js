@@ -37,6 +37,9 @@ router.route('/api/users/user')
 router.route('/api/users/currentuser/')
   .post(authController.isAuthenticated, userService.postUser);
 
+router.route('/api/users/currentuser/authenticate/')
+  .get(authController.isAuthenticated, userService.getAuthentication);
+
 
 
 router.route('/api/users/currentuser/guns/')
