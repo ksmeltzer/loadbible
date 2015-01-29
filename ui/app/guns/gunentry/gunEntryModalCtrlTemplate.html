@@ -1,0 +1,39 @@
+<div class="modal-header">
+    <h3 class="modal-title">Add gun</h3>
+</div>
+<div class="modal-body">
+    <form>
+        <div class="form-group">
+            <div class="input-group">
+                <label for="manufacturer">Manufacturer</label>
+                <input type="text" name="manufacturer" placeholder="Manufacturer name" typeahead="manufacturer.name for manufacturer in gunConfig.manufacturers | filter:$viewValue | limitTo:8" class="form-control" ng-model="editGun.manufacturer" ng-blur="manufacturer_blur()">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="input-group">
+                <label for="model">Model</label>
+                <input type="text" type="text" class="form-control" name="model" placeholder="Model" ng-model="editGun.model" typeahead="model.name for model in currentSelectedManufacturer.models | filter:$viewValue | limitTo:8" ng-blur="model_blur()">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="input-group">
+                <label for="type">type (rifle, shotgun, pistol)</label>
+                <input type="text" class="form-control" name="type" placeholder="Type" ng-model="editGun.type" typeahead="gunTypes.name for gunTypes in gunConfig.gunTypes | filter:$viewValue | limitTo:8" />
+            </div>
+        </div>
+
+         <div class="form-group" ng-repeat="field in currentSelectedType.fields">
+            <div class="input-group">
+                <label for="type">{{field.name}}</label>
+                <input type="text" class="form-control" name="{{field.name}}" placeholder="{{field.name}}" ng-init="editGun.fields[$index].name = field.name" ng-model="editGun.fields[$index].value" typeahead="values.value for values in field.values | filter:$viewValue | limitTo:8" />
+            </div>
+        </div>
+    </form>
+
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="ok()">OK</button>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>

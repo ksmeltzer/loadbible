@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Loads.io</title>
+  <meta name="description" content="" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <script type="text/javascript" src="/app/lib/bower_components/angular/angular.js"></script>
+    <script type="text/javascript" src="/app/lib/bower_components/angular-route/angular-route.js"></script>
+    <script type="text/javascript" src="/app/lib/bower_components/angular-http-auth/src/http-auth-interceptor.js"></script>
+    <script type="text/javascript" src="/app/lib/bower_components/angular-smart-table/dist/smart-table.debug.js"></script>
+    <script type="text/javascript" src="/app/lib/bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+    <script type="text/javascript" src="/app/lib/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script type="text/javascript" src="/app/lib/bower_components/forge/js/debug.js"></script>
+    <script type="text/javascript" src="/app/lib/bower_components/forge/js/util.js"></script>
+    <script type="text/javascript" src="/app/lib/bower_components/forge/js/forge.js"></script>
+    <script type="text/javascript" src="/app/lib/bower_components/forge/js/sha512.js"></script>
+    <script type="text/javascript" src="/app/lib/bower_components/angular-validation-match/dist/angular-input-match.js"></script>
+
+    <script type="text/javascript" src="/app/app.js"></script>
+    <script type="text/javascript" src="/app/users/login/loginService.js"></script>
+    <script type="text/javascript" src="/app/guns/gunlist/gunListDirective.js"></script>
+
+    <script type="text/javascript" src="/app/guns/gunService.js"></script>
+    <script type="text/javascript" src="/app/users/userService.js"></script>
+    <script type="text/javascript" src="/app/guns/gunentry/gunEntryModalCtrl.js"></script>
+
+    <script type="text/javascript" src="/app/users/register/registrationDirective.js"></script>
+
+
+
+
+
+
+    <link rel="stylesheet" type="text/css" href="/app/lib/bower_components/normalize.css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="/app/lib/bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/app/lib/bower_components/bootstrap/dist/css/bootstrap-theme.css" />
+
+        <!--link rel="stylesheet" type="text/css" href="/css/style.css" /-->
+</head>
+<body class="page page-homepage">
+  <!--[if lt IE 7]>
+      <p >You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+  <![endif]-->
+
+  <div ng-view></div>
+</body>
+</html>
