@@ -49,8 +49,10 @@ router.route('/api/users/currentuser/guns/')
 router.route('/api/users/currentuser/guns/:id')
   .put(authController.isAuthenticated, userService.putCurrentUserGuns);
 
-router.route('/api/guns/types/')
-    .get(gunService.getTypes);
+router.route('/api/bullets/bullet/')
+    .post();
+    
+  router.route();
 
 
 

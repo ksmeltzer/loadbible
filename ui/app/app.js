@@ -4,12 +4,9 @@ var app = angular.module('myApp', ['ngRoute', 'smart-table', 'ui.bootstrap', 'va
 
 app.config(['$routeProvider', '$httpProvider',
            function ($routeProvider, $httpProvider){
-        $routeProvider.when('/welcome', {
-            templateUrl: '/app/welcomeView.html'
-        });
-        $routeProvider.when('/register', {
-            template: '<div registration-directive=""></div>'
-        });
+        $routeProvider.when('/welcome', {templateUrl: '/app/welcomeView.html'});
+        $routeProvider.when('/register', {template: '<div registration-directive=""></div>'});
+        $routeProvider.when('/bullet', {template: '<div bullet-list-directive=""></div>'});
         $routeProvider.otherwise({
             redirectTo: '/welcome'
         });

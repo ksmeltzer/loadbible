@@ -1,0 +1,84 @@
+<div class="modal-header">
+    <h3 class="modal-title">Add gun</h3>
+</div>
+<div class="modal-body">
+    <form>
+        <div class="form-group">
+            <div class="input-group">
+                <label for="manufacturer">catridgeSize</label>
+                <input type="text" name="catridgeSize" placeholder='catridgeSize' class="form-control" ng-model="editBullet.catridgeSize">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="input-group">
+                <label for="model">manufacturer</label>
+                <input type="text" class="form-control" name="manufacturer" placeholder="manufacturer" ng-model="editBullet.manufacturer">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="input-group">
+                <label for="model">diameter</label>
+                <input type="text" class="form-control" name="diameter" placeholder="diameter" ng-model="editBullet.diameter"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="input-group">
+                <label for="grain">grain</label>
+                <input type="text" class="form-control" name="grain" placeholder="diameter" ng-model="editBullet.grain">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="input-group">
+                <label for="model">type</label>
+                <input type="text" class="form-control" name="type" placeholder="type" ng-model="editBullet.type">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="input-group">
+                <label for="model">sectionalDensity</label>
+                <input type="text" class="form-control" name="sectionalDensity" placeholder="sectionalDensity" ng-model="editBullet.sectionalDensity">
+            </div>
+        </div>
+
+         <div class="form-group">
+            <div class="input-group">
+                <label for="model">ballisticCoefficient</label>
+                <input type="text" class="form-control" name="ballisticCoefficient" placeholder="ballisticCoefficient" ng-model="editBullet.ballisticCoefficient">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="input-group">
+                <label for="model">length</label>
+                <input type="text" class="form-control" name="length" placeholder="length" ng-model="editBullet.length">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="input-group">
+                <label for="model">coating</label>
+                <input type="text" class="form-control" name="coating" placeholder="coating" ng-model="editBullet.coating">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="input-group">
+                <label for="model">material</label>
+                <input type="text" class="form-control" name="material" placeholder="material" ng-model="editBullet.material">
+            </div>
+        </div>
+
+
+
+    </form>
+
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="ok()">OK</button>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>
