@@ -28,3 +28,15 @@ exports.getCollectionNames = function()
 {
     return collectionNames;
 }
+
+exports.getSchemaOptions = function()
+{
+      return {
+    toObject: {
+      virtuals: true
+    }
+    ,toJSON: {
+      virtuals: true
+    }
+  };
+}

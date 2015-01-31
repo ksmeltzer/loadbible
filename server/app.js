@@ -8,7 +8,6 @@ var authController = require('./users/authentication.js');
 
 var app = express();
 
-app.use(bodyParser());
 
 app.use(bodyParser.json());
 
@@ -52,7 +51,6 @@ router.route('/api/users/currentuser/guns/:id')
 router.route('/api/bullets/bullet/')
     .post();
     
-  router.route();
 
 
 

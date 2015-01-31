@@ -1,21 +1,13 @@
-var mongoose = require('../shared/db.js').getConnection();
+var db = require('../shared/db.js');
+var mongoose = db.getConnection();
 var q = require('q');
 
-  var schemaOptions = {
-    toObject: {
-      virtuals: true
-    }
-    ,toJSON: {
-      virtuals: true
-    }
-  };
   
-  
-  var BulletSchema = mongoose.model({
-      catridgeSize : {type : String, required : true},
+  var BulletSchema = mongoose.Schema({
+      cartridgeSize : {type : String, required : true},
       manufacturer : {type : String},
       diameter : {type : Number, required : true},
-      grain : {type : number, reqired : true},
+      grain : {type : Number, reqired : true},
       type : {type: String},
       sectionalDensity : {type : Number},
       ballisticCoefficient : {type : Number},
@@ -23,7 +15,7 @@ var q = require('q');
       coating : {type : String},
       material : {type: String},
       approved : {type: Boolean}
-     }, schemaOptions);
+     }, db.getSchemaOptions());
 
 bulletSchema.virtual('id')
 .get(function () {
@@ -34,4 +26,4 @@ var Bullet = mongoose.model('bullets', BulletSchema);
 
 
 module.exports.BulletSchema = BulletSchema;
-
+module.exports.Bullet = Bullet;

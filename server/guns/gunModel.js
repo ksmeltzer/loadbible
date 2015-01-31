@@ -110,7 +110,7 @@ module.exports.getManufacturers = function () {
 
         });
         return def2.promise;
-    }
+    };
 
 
 
@@ -125,7 +125,7 @@ module.exports.getManufacturers = function () {
         q.all(promiseChain).then(function(){deferred.resolve(manufacturerList)});
     });
     return deferred.promise;
-}
+};
 
 module.exports.getGunTypes = function () {
     var deferred = q.defer();
@@ -148,7 +148,7 @@ module.exports.getGunTypes = function () {
         return def2.promise;
 
 
-    }
+    };
 
 
     var getFieldsForType = function (gunType) {
@@ -169,7 +169,7 @@ module.exports.getGunTypes = function () {
         });
         return def2.promise;
 
-    }
+    };
 
 
     GunType.find({}, function (err, list) {
@@ -182,9 +182,9 @@ module.exports.getGunTypes = function () {
         }
         q.all(promiseChain).then(function(results){
             console.log(results);
-            deferred.resolve(gunTypeList)
+            deferred.resolve(gunTypeList);
         });
 
     });
     return deferred.promise;
-}
+};
