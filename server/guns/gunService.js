@@ -12,7 +12,7 @@ var customTypeFieldModels = [];
 exports.getConfig = function (req, res) {
 
 
-    q.all([gunModels.getManufacturers(), gunModels.getGunTypes()]).then(function(a){
+    q.all([gunModels.getGunModels(), gunModels.getGunTypes()]).then(function(a){
 
          res.send({manufacturers : a[0], gunTypes : a[1]});
     });
@@ -20,19 +20,5 @@ exports.getConfig = function (req, res) {
 
 
 
-}
-
-exports.getManufacturers = function (req, res) {
-
-    gunModels.getManufacturers().then(list)
-    {
-        res.send(list);
-    }
-
-};
-
-exports.getTypes = function (req, res) {
-
-    res.send(gunModels.getGunTypes());
 };
 

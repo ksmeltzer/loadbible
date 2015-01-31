@@ -1,15 +1,8 @@
-var mongoose = require('../shared/db.js').getConnection();
+var db = require('../shared/db.js');
+var mongoose = db.getConnection();
 var q = require('q');
 
-  var schemaOptions = {
-    toObject: {
-      virtuals: true
-    }
-    ,toJSON: {
-      virtuals: true
-    }
-  };
-
+var arrayUtil = require('../shared/util/arrayUtil.js');
 
 
 var GunTypeSchema = mongoose.Schema({
@@ -20,7 +13,7 @@ var GunTypeSchema = mongoose.Schema({
     },
     fields: [String]
 
-}, schemaOptions);
+}, db.getSchemaOptions());
 
 GunTypeSchema.virtual('id')
 .get(function () {
@@ -29,37 +22,14 @@ GunTypeSchema.virtual('id')
 
 var GunType = mongoose.model('gun.types', GunTypeSchema);
 
-var GunManufacturerSchema = mongoose.Schema({
-    name: {
-        type: String,
-        required: true,
-        unique: true
-    },
-    models: [GunModel]
 
-}, schemaOptions);
-
-GunManufacturerSchema.virtual('id')
-.get(function () {
-  return this._id;
-});
-
-var GunManufacturer = mongoose.model('gun.manufacturers', GunManufacturerSchema);
 
 var GunModelSchema = mongoose.Schema({
-    name: {
-        type: String,
-        required: true,
-        unique: true
-    },
-    type: {
-        type: String
-    },
-    manufacturer: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'GunManufacturer'
-    }
-}, schemaOptions);
+    manufacturer : {type: String, required: true},
+    name: {type: String, required: true, unique: true},
+    type: {type: String, required: true},
+    approved : {type: Boolean, required: true, default: false}
+}, db.getSchemaOptions());
 
 GunModelSchema.virtual('id')
 .get(function () {
@@ -68,64 +38,42 @@ GunModelSchema.virtual('id')
 
 var GunModel = mongoose.model('gun.models', GunModelSchema);
 
-var GunTypeCustomFieldSchema = mongoose.Schema({
-    fieldName: {
-        type: String
-    },
-    value: {
-        type: String
-    }
 
-}, schemaOptions);
-
-GunTypeCustomFieldSchema.virtual('id')
-.get(function () {
-  return this._id;
-});
-
-var GunTypeCustomField = mongoose.model('gun.type.customfields', GunTypeCustomFieldSchema);
 
 
 module.exports.GunTypeSchema = GunTypeSchema;
 module.exports.GunType = GunType;
 module.exports.GunModelSchema = GunModelSchema;
 module.exports.GunModel = GunModel;
-module.exports.GunManufacturerSchema = GunManufacturerSchema;
-module.exports.GunManufacturer = GunManufacturer;
 
-module.exports.getManufacturers = function () {
+
+module.exports.getGunModels = function()
+{
     var deferred = q.defer();
-    var last = false;
-    var manufacturerList = [];
-
-    var addTypes = function (manufacturer) {
-        var def2 = q.defer();
-        manufacturer.models = [];
-        GunModel.find({
-            'manufacturer': manufacturer._id
-        }, function (err2, modelList) {
-            manufacturer.models = modelList;
-            manufacturerList.push(manufacturer);
-                def2.resolve(manufacturer);
+    var listByManufacturer = [];
+    GunModel.find({}, function (err, modelList) {
+            for(var x = 0; x < modelList.length; x++)
+            {
+                var tmpModel = modelList[x];
+                if(!listByManufacturer[tmpModel.manufacturer])
+                {
+                    listByManufacturer[tmpModel.manufacturer] = {name: tmpModel.manufacturer, models: [tmpModel]};
+                }
+                else
+                {
+                    listByManufacturer[tmpModel.manufacturer].models.push(tmpModel);
+                }
+            }
+            
+           
+            
+            deferred.resolve(arrayUtil.convertAssociativeArrayToNumericArray(listByManufacturer));
+            
 
         });
-        return def2.promise;
-    };
-
-
-
-
-    GunManufacturer.find({}, function (err, list) {
-
-
-         var promiseChain = [];
-        for (var i = 0; i < list.length; i++) {
-            promiseChain.push(addTypes(list[i]));
-        }
-        q.all(promiseChain).then(function(){deferred.resolve(manufacturerList)});
-    });
-    return deferred.promise;
+        return deferred.promise;
 };
+
 
 module.exports.getGunTypes = function () {
     var deferred = q.defer();

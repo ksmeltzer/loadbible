@@ -27,3 +27,14 @@ var Bullet = mongoose.model('bullets', BulletSchema);
 
 module.exports.BulletSchema = BulletSchema;
 module.exports.Bullet = Bullet;
+
+
+module.exports.getBullets = function()
+{
+    var deferred = q.defer();
+    Bullet.find({}, function(err, bulletList){
+        deferred.resolve(bulletList);
+    });
+    
+    return deferred.promise;
+}
