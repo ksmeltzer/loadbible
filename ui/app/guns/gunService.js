@@ -17,7 +17,7 @@ app.factory('gunService', ['$rootScope', '$http', 'userService', 'loadService', 
     service.endpoints = {};
     service.endpoints.GUN_TYPES = "/api/guns/types/";
     
-    service.manufacturer = {};
+    service.manufacturers = {};
     
     service.type = {};
 

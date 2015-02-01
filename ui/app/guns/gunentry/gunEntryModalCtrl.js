@@ -2,88 +2,87 @@
 
 var app = angular.module('myApp');
 
-app.controller('gunEntryModalCtrl', function ($scope, $rootScope, $modalInstance, gunService, loadService) {
+app.controller('gunEntryModalCtrl', function ($scope, $rootScope, $modalInstance, gunService, loadService, cartridgeService) {
 
     $scope.currentSelectedManufacturer = {};
     $scope.currentSelectedManufacturer.models = [];
 
-       
-    $scope.gunConfig = loadService.config;
 
-    gunService.manufacturers.get();
+    var config = loadService.config;
 
-        $scope.editGun = {};
+    var gunManufacturerList = gunService.manufacturers.get();
+    
+    var shotgunCartridges = cartridgeService.getShotgunCartridges();
+    
+    $scope.config = config;
+    $scope.gunManufacturerList = gunManufacturerList;
+    $scope.shotgunCartridges = shotgunCartridges;
+    
+
+    $scope.editGun = {};
     $scope.editGun.fields = [];
 
-         //gunService.requestGunConfig();
+    //gunService.requestGunConfig();
 
 
-        $scope.ok = function () {
-            $modalInstance.close($scope.editGun);
-        };
-
-        $scope.cancel = function () {
-            $modalInstance.dismiss('cancel');
-        };
-
-        $scope.manufacturer_blur = function()
-    {
-
-            if($scope.editGun.manufacturer)
-            {
-                 $scope.currentSelectedManufacturer = {};
-                for(var x = 0; x < $scope.gunConfig.manufacturers.length; x++)
-                {
-                    if($scope.gunConfig.manufacturers[x].name == $scope.editGun.manufacturer)
-                    {
-                        $scope.currentSelectedManufacturer = $scope.gunConfig.manufacturers[x];
-                        break;
-                    }
-                }
-            }
+    $scope.ok = function () {
+        $modalInstance.close($scope.editGun);
     };
 
-    $scope.model_blur = function()
+    $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+    };
+
+    $scope.manufacturer_blur = function ()
     {
-        if($scope.currentSelectedManufacturer)
+
+        if ($scope.editGun.manufacturer)
+        {
+            $scope.currentSelectedManufacturer = {};
+            for (var x = 0; x < gunManufacturerList.length; x++)
             {
-
-                if($scope.editGun.model)
+                if (gunManufacturerList[x].name == $scope.editGun.manufacturer)
                 {
-                    for(var x = 0; x < $scope.currentSelectedManufacturer.models.length; x++)
+                    $scope.currentSelectedManufacturer = gunManufacturerList[x];
+                    break;
+                }
+            }
+        }
+    };
+
+    $scope.model_blur = function ()
+    {
+        if ($scope.currentSelectedManufacturer)
+        {
+
+            if ($scope.editGun.model)
+            {
+                for (var x = 0; x < $scope.currentSelectedManufacturer.models.length; x++)
+                {
+                    if ($scope.currentSelectedManufacturer.models[x].name == $scope.editGun.model)
                     {
-                        if( $scope.currentSelectedManufacturer.models[x].name == $scope.editGun.model)
+                        $scope.currentSelectedManufacturer.currentlySelectedModel = $scope.currentSelectedManufacturer.models[x];
+                        if ($scope.currentSelectedManufacturer.currentlySelectedModel.type)
                         {
-                            $scope.currentSelectedManufacturer.currentlySelectedModel = $scope.currentSelectedManufacturer.models[x];
-                            if($scope.currentSelectedManufacturer.currentlySelectedModel.type)
+                            $scope.editGun.type = $scope.currentSelectedManufacturer.currentlySelectedModel.type;
+
+                            for (var i = 0; i < config.gunTypes.length; i++)
                             {
-                                $scope.editGun.type = $scope.currentSelectedManufacturer.currentlySelectedModel.type;
+                                var typeConf = config.gunTypes[i];
 
-                                for(var i = 0; i < $scope.gunConfig.gunTypes.length; i++)
+                                if (typeConf.name == $scope.editGun.type)
                                 {
-                                    var typeConf  = $scope.gunConfig.gunTypes[i];
-
-                                    if(typeConf.name == $scope.editGun.type)
-                                    {
-                                         $scope.currentSelectedType = typeConf;
-                                        break;
-                                    }
+                                    $scope.currentSelectedType = typeConf;
+                                    break;
                                 }
-
-                                break;
                             }
+
+                            break;
                         }
                     }
                 }
             }
-    }
+        }
+    };
 
-    $scope.parseField = function(field, $index, value)
-    {
-        console.log(field);
-        console.log($index);
-        console.log(value);
-
-    }
-
-    });
+});

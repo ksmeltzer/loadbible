@@ -73,3 +73,11 @@ module.exports.getWads = function()
     });
     return deferred.promise;
 };
+
+module.exports.getChokes = function()
+{
+    var deferred = q.defer();
+    var chokes = ['Cylinder', 'Skeet 1', 'Improved', 'Light Modified', 'Modified', 'Improved Modified', 'Full', 'Extra Full', 'Turkey', 'Rifled'];
+    deferred.resolve(chokes);
+    return deferred.promise;
+};

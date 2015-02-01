@@ -8,7 +8,7 @@
                     <th st-sort="name">Manufacturer</th>
                     <th st-sort="name">Model</th>
                     <th st-sort="name">Type</th>
-                    <th st-sort="name">Custom Fields</th>
+                    <th st-sort="name">Details</th>
                 </tr>
             </thead>
             <tbody>
@@ -17,7 +17,13 @@
                     <td>{{row.model}}</td>
                     <td>{{row.type}}</td>
                      <td>
-                        <span ng-repeat="field in row.fields">{{field.value}} {{field.name}}{{$last ? '' : ', '}}</span>
+                         <span ng-if="row.type == 'Shotgun'">{{row.cartridgeSize}} Gauge,</span>
+                         <span ng-if="row.type != 'Shotgun'">{{row.cartridgeSize}} Caliber,</span>
+                          <span ng-if="row.chamberLength">{{row.chamberLength}} Inch Chamber Length,</span>
+                          <span ng-if="row.choke">{{row.choke}} Choke ,</span>
+                          <span ng-if="row.twistRate">{{row.twistRate}} Twist Rate,</span>
+                          <span ng-if="row.barrelLength">{{row.barrelLength}} Inch Barrel</span>
+                          
                     </td>
                     <td>
                         <input type="button" value="Delete" ng-click="deleteGun(row)"/>

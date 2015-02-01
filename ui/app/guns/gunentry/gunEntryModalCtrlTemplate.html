@@ -6,7 +6,7 @@
         <div class="form-group">
             <div class="input-group">
                 <label for="manufacturer">Manufacturer</label>
-                <input type="text" name="manufacturer" placeholder="Manufacturer name" typeahead="manufacturer.name for manufacturer in gunConfig.manufacturers | filter:$viewValue | limitTo:8" class="form-control" ng-model="editGun.manufacturer" ng-blur="manufacturer_blur()">
+                <input type="text" name="manufacturer" placeholder="Manufacturer name" typeahead="manufacturer.name for manufacturer in gunManufacturerList | filter:$viewValue | limitTo:8" class="form-control" ng-model="editGun.manufacturer" ng-blur="manufacturer_blur()">
             </div>
         </div>
 
@@ -19,29 +19,29 @@
 
         <div class="form-group">
             <div class="input-group">
-                <label for="type">type (Rifle, Pistol, Shotgun)</label>
-                <input type="text" class="form-control" name="type" placeholder="Type" ng-model="editGun.type" typeahead="gunTypes.name for gunTypes in gunConfig.gunTypes | filter:$viewValue | limitTo:8" />
+                <label for="type">Type (Rifle, Pistol, Shotgun)</label>
+                <input type="text" class="form-control" name="type" placeholder="Type" ng-model="editGun.type" typeahead="gunTypes.name for gunTypes in config.gunTypes | filter:$viewValue | limitTo:8" />
             </div>
         </div>
         
          <div class="form-group" ng-if="editGun.type=='Shotgun'">
             <div class="input-group">
-                <label for="cartridgeSize"></label>
-                <input type="text" class="form-control" name="cartridgeSize" placeholder="Gauge" ng-model="editGun.cartridgeSize" />
+                <label for="cartridgeSize">Gauge</label>
+                <input type="text" class="form-control" name="cartridgeSize" placeholder="Gauge" ng-model="editGun.cartridgeSize" typeahead="cartridge.name for cartridge in shotgunCartridges | filter:$viewValue | limitTo:8"/>
             </div>
         </div>
         
         <div class="form-group" ng-if="editGun.type=='Shotgun'">
             <div class="input-group">
-                <label for="chamberLength"></label>
-                <input type="text" class="form-control" name="chamberLength" placeholder="Chamber Length" ng-model="editGun.chamberLength" />
+                <label for="chamberLength">Chamber Length</label>
+                <input type="text" class="form-control" name="chamberLength" placeholder="Chamber Length" ng-model="editGun.chamberLength" typeahead="chamberLength for chamberLength in config.chamberLength | filter:$viewValue | limitTo:8"/>
             </div>
         </div>
         
          <div class="form-group" ng-if="editGun.type=='Shotgun'">
             <div class="input-group">
-                <label for="choke"></label>
-                <input type="text" class="form-control" name="choke" placeholder="Choke" ng-model="editGun.choke" />
+                <label for="choke">Choke</label>
+                <input type="text" class="form-control" name="choke" placeholder="Choke" ng-model="editGun.choke" typeahead="choke for choke in config.chokes | filter:$viewValue | limitTo:8"/>
             </div>
         </div>
         
@@ -61,8 +61,8 @@
         
         <div class="form-group">
             <div class="input-group">
-                <label for="barrelLength"></label>
-                <input type="text" class="form-control" name="barrelLength" placeholder="Barrel Length" ng-model="editGun.barrelLength" />
+                <label for="barrelLength">Barrel Length (Inches)</label>
+                <input type="text" class="form-control" name="barrelLength" placeholder="Barrel Length" ng-model="editGun.barrelLength" typeahead="barrelLength for barrelLength in config.barrelLengths | filter:$viewValue | limitTo:8"/>
             </div>
         </div>
 

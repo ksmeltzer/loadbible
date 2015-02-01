@@ -73,3 +73,11 @@ module.exports.getBarrelLengths = function()
   
   return deferred.promise;
 };
+
+
+module.exports.getGunTypes = function()
+{
+    var deferred = q.defer();
+    deferred.resolve(["Rifle", "Pistol", "Shotgun"]);
+    return deferred.promise;
+};
