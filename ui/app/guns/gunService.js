@@ -1,7 +1,7 @@
 "use strict"
 var app = angular.module('myApp');
 
-app.factory('gunService', ['$rootScope', '$http', 'userService', function($rootScope, $http, userService)
+app.factory('gunService', ['$rootScope', '$http', 'userService', 'loadService', function($rootScope, $http, userService, loadService)
 {
 
     var gunConfig = null;
@@ -12,28 +12,15 @@ app.factory('gunService', ['$rootScope', '$http', 'userService', function($rootS
 
 
     service.eventNames = {};
-    service.eventNames.GUN_CONFIG_CHANGED = "gunService.GUN_CONFIG_CHANGED";
-    service.eventNames.GUN_TYPES_LOADED = "gunService.GUN_TYPES_LOADED"
+    
 
     service.endpoints = {};
-    service.endpoints.GUN_CONFIG = '/api/guns/config';
     service.endpoints.GUN_TYPES = "/api/guns/types/";
-
+    
+    service.manufacturer = {};
+    
     service.type = {};
 
-    service.type.requestList = function()
-    {
-        $http.get(service.endpoints.GUN_TYPES).
-            success(function (data, status, headers, config) {
-            console.log('farting');
-            $rootScope.$emit(service.eventNames.GUN_TYPES_LOADED, data);
-                console.log(data);
-            }).
-            error(function (data, status, headers, config) {
-                console.log("error: ");
-                console.log(data);
-            });
-    }
 
     service.type.save = function(gunType)
     {
@@ -53,28 +40,32 @@ app.factory('gunService', ['$rootScope', '$http', 'userService', function($rootS
             });
 
         }
-    }
-
-
-    service.requestGunConfig = function()
+    };
+    
+    service.manufacturers.get = function()
     {
-        if(!gunConfig)
-        {
-        $http.get(service.endpoints.GUN_CONFIG).
-            success(function(data, status, headers, config)
-            {
-            gunConfig = data;
-                $rootScope.$emit(service.eventNames.GUN_CONFIG_CHANGED, gunConfig);
-            }).
-            error(function(data, status, headers, config)
-            {
-            });
-        }
-        else
-        {
-            $rootScope.$emit(service.eventNames.GUN_CONFIG_CHANGED, gunConfig);
-        }
-    }
+      var config = loadService.config;
+      
+      if(config.gunManufacturers)
+      {
+          return config.gunManufacturers;
+      }
+      
+      var manufacturerArray = jlinq.from(config.gunModels).distinct('manufacturer');
+      
+      for(var x = 0; x < manufacturerArray.length; x++)
+      {
+          
+          var models = jlinq.from(config.gunModels).equals("manufacturer", manufacturerArray[x]).select();
+          manufacturerArray[x] = {name : manufacturerArray[x], models: models};
+      }
+      
+      config.gunManufacturers = manufacturerArray;
+      return manufacturerArray;
+    };
+
+
+   
 
 
 

@@ -2,22 +2,20 @@
 
 var app = angular.module('myApp');
 
-app.controller('gunEntryModalCtrl', function ($scope, $rootScope, $modalInstance, gunService) {
+app.controller('gunEntryModalCtrl', function ($scope, $rootScope, $modalInstance, gunService, loadService) {
 
     $scope.currentSelectedManufacturer = {};
     $scope.currentSelectedManufacturer.models = [];
 
-        $rootScope.$on(gunService.eventNames.GUN_CONFIG_CHANGED, function(event, gunConfigData) {
-           $scope.gunConfig = gunConfigData;
+       
+    $scope.gunConfig = loadService.config;
 
-            console.log(gunConfigData);
-        });
-
+    gunService.manufacturers.get();
 
         $scope.editGun = {};
     $scope.editGun.fields = [];
 
-         gunService.requestGunConfig();
+         //gunService.requestGunConfig();
 
 
         $scope.ok = function () {

@@ -19,17 +19,54 @@
 
         <div class="form-group">
             <div class="input-group">
-                <label for="type">type (rifle, shotgun, pistol)</label>
+                <label for="type">type (Rifle, Pistol, Shotgun)</label>
                 <input type="text" class="form-control" name="type" placeholder="Type" ng-model="editGun.type" typeahead="gunTypes.name for gunTypes in gunConfig.gunTypes | filter:$viewValue | limitTo:8" />
             </div>
         </div>
-
-         <div class="form-group" ng-repeat="field in currentSelectedType.fields">
+        
+         <div class="form-group" ng-if="editGun.type=='Shotgun'">
             <div class="input-group">
-                <label for="type">{{field.name}}</label>
-                <input type="text" class="form-control" name="{{field.name}}" placeholder="{{field.name}}" ng-init="editGun.fields[$index].name = field.name" ng-model="editGun.fields[$index].value" typeahead="values.value for values in field.values | filter:$viewValue | limitTo:8" />
+                <label for="cartridgeSize"></label>
+                <input type="text" class="form-control" name="cartridgeSize" placeholder="Gauge" ng-model="editGun.cartridgeSize" />
             </div>
         </div>
+        
+        <div class="form-group" ng-if="editGun.type=='Shotgun'">
+            <div class="input-group">
+                <label for="chamberLength"></label>
+                <input type="text" class="form-control" name="chamberLength" placeholder="Chamber Length" ng-model="editGun.chamberLength" />
+            </div>
+        </div>
+        
+         <div class="form-group" ng-if="editGun.type=='Shotgun'">
+            <div class="input-group">
+                <label for="choke"></label>
+                <input type="text" class="form-control" name="choke" placeholder="Choke" ng-model="editGun.choke" />
+            </div>
+        </div>
+        
+        <div class="form-group" ng-if="editGun.type=='Rifle' || editGun.type=='Pistol'">
+            <div class="input-group">
+                <label for="cartridgeSize">Caliber</label>
+                <input type="text" class="form-control" name="cartridgeSize" placeholder="Caliber" ng-model="editGun.cartridgeSize" />
+            </div>
+        </div>
+        
+        <div class="form-group" ng-if="editGun.type=='Rifle' || editGun.type=='Pistol'">
+            <div class="input-group">
+                <label for="twistRate">twistRate</label>
+                <input type="text" class="form-control" name="twistRate" placeholder="Twist Rate" ng-model="editGun.twistRate" />
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <div class="input-group">
+                <label for="barrelLength"></label>
+                <input type="text" class="form-control" name="barrelLength" placeholder="Barrel Length" ng-model="editGun.barrelLength" />
+            </div>
+        </div>
+
+         
     </form>
 
 </div>

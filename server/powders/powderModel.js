@@ -28,20 +28,8 @@ module.exports.getPowders = function()
   var deferred = q.defer();
   var manufacturerSortedList = [];
   Powder.find({}, function(err, powderList){
-      for(var x = 0; x < powderList.length; x++)
-      {
-          var tmpPowder = powderList[x];
-          if(!manufacturerSortedList[tmpPowder.manufacturer])
-          {
-              manufacturerSortedList[tmpPowder.manufacturer] = {name: tmpPowder.manufacturer, powders: [tmpPowder]};
-          }
-          else
-          {
-              manufacturerSortedList[tmpPowder.manufacturer].powders.push(tmpPowder);
-          }
-          
-      }
-      deferred.resolve(arrayUtil.convertAssociativeArrayToNumericArray(manufacturerSortedList));
+     
+      deferred.resolve(powderList);
       
       
   });

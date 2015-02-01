@@ -17,7 +17,7 @@ var q = require('q');
       approved : {type: Boolean}
      }, db.getSchemaOptions());
 
-bulletSchema.virtual('id')
+BulletSchema.virtual('id')
 .get(function () {
   return this._id;
 });
@@ -37,4 +37,4 @@ module.exports.getBullets = function()
     });
     
     return deferred.promise;
-}
+};

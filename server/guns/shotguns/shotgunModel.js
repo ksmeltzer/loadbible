@@ -57,20 +57,8 @@ module.exports.getHulls = function()
     var deferred = q.defer();
     var hullsSortedByManufacturer = [];
     Hull.find({}, function(err, hullList){
-        for(var x = 0; x < hullList.length; x++)
-        {
-            var tmpHull = hullList[x];
-            if(!hullsSortedByManufacturer[tmpHull.manufacturer])
-            {
-                hullsSortedByManufacturer[tmpHull.manufacturer] = {name : tmpHull.manufacturer, hulls: [tmpHull]};
-            }
-            else
-            {
-                hullsSortedByManufacturer[tmpHull.manufacturer].push(tmpHull);
-            }
-            
-            deferred.resolve(arrayUtil.convertAssociativeArrayToNumericArray(hullsSortedByManufacturer));
-        }
+       
+            deferred.resolve(hullList);
     });
     return deferred.promise;
 };
@@ -80,19 +68,8 @@ module.exports.getWads = function()
     var deferred = q.defer();
     var wadsSortedByManufacturer = [];
     Wad.find({}, function(err, wadList){
-        for(var x = 0; x < wadList.length; x++)
-        {
-            var tmpWad = wadList[x];
-            if(!wadsSortedByManufacturer[tmpWad.manufacturer])
-            {
-                 wadsSortedByManufacturer[tmpWad.manufacturer] = {name: tmpWad.manufacturer, wads: [tmpWad]};
-            }
-            else
-            {
-                wadsSortedByManufacturer[tmpWad.manufacturer].wads.push(tmpWad);
-            }
-        }
-        deferred.resolve(arrayUtil.convertAssociativeArrayToNumericArray(wadsSortedByManufacturer));
+       
+        deferred.resolve(wadList);
     });
     return deferred.promise;
 };

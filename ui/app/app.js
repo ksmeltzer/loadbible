@@ -21,11 +21,16 @@ app.config(['$routeProvider', '$httpProvider',
 
 
 
-app.run(['$rootScope', 'loginService', function ($rootScope, loginService) {
+app.run(['$rootScope', 'loginService', 'loadService',  function ($rootScope, loginService, loadService) {
 
+        loadService.requestConfig();
+        
+        
         $rootScope.$on('event:auth-loginRequired', function () {
             loginService.showLogin();
         });
+        
+        
     }]);
 
 

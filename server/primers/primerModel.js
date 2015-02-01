@@ -28,20 +28,9 @@ module.exports.getPrimers = function()
     var deferred = q.defer();
     var primersSortedByManufacturer = [];
     Primer.find({}, function(err, primerList){
-        for(var x = 0; x< primerList.length; x++)
-        {
-            var tmpPrimer = primerList[x];
-            if(!primersSortedByManufacturer[tmpPrimer.manufacturer])
-            {
-                primersSortedByManufacturer[tmpPrimer.manufacturer] = {name : tmpPrimer.manufacturer, primers : [tmpPrimer]};
-            }
-            else
-            {
-                primersSortedByManufacturer[tmpPrimer.manufacturer].primers.push(tmpPrimer);
-            }
-        }
         
-        deferred.resolve(arrayUtil.convertAssociativeArrayToNumericArray(primersSortedByManufacturer));
+        
+        deferred.resolve(primerList);
     });
     return deferred.promise;
 };

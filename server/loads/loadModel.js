@@ -5,6 +5,8 @@ var q = require('q');
 var powderModel = require('../powders/powderModel.js');
 var primerModel = require('../primers/primerModel.js');
 var shotgunModel = require('../guns/shotguns/shotgunModel.js');
+var bulletModel = require('../bullets/bulletModel.js');
+var gunModel = require('../guns/gunModel.js');
 
 
 
@@ -44,9 +46,11 @@ module.exports.Load = Load;
 
 module.exports.getConfig = function()
 {
-    
-   q.all([powderModel.getPowders(), primerModel.getPrimers(), shotgunModel.getHulls(), shotgunModel.getWads()]).then(function(a){
+    var deferred = q.defer();
+   q.all([powderModel.getPowders(), primerModel.getPrimers(), shotgunModel.getHulls(), shotgunModel.getWads(), bulletModel.getBullets(), gunModel.getGunModels(), gunModel.getTwistRates(), gunModel.getBarrelLengths()]).then(function(a){
 
-         console.log({powders : a[0], primers : a[1], hulls: a[2], wads: a[3]});
-    });  
+         deferred.resolve({powders : a[0], primers : a[1], hulls: a[2], wads: a[3], bullets: a[4], gunModels: a[5], twistRates : a[6], barrelLengths : a[7]});
+    }); 
+    
+    return deferred.promise;
 };

@@ -19,14 +19,15 @@ app.use(passport.initialize());
 
 var gunService = require('./guns/gunService.js');
 var userService = require('./users/userService.js');
+var loadService = require('./loads/loadService.js');
 
 console.log(gunService);
 
 
 var router = express.Router();
 
-router.route('/api/guns/config')
-  .get(gunService.getConfig);
+router.route('/api/config')
+  .get(loadService.getConfig);
 
 router.route('/api/users/user')
   .get(authController.isAuthenticated, userService.getUser)
