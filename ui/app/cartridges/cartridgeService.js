@@ -4,17 +4,14 @@ var app = angular.module('myApp');
 app.factory('cartridgeService', ['loadService', function (loadService) {
         var cartridgeService = {cartridges: {}};
         
-        var getCartridgesByType = function(type)
+        var getCartridgesByType = function(config, type)
         {
-            var config = loadService.config;
-
-            var typeCartridges = jlinq.from(config.cartridges).contains("gunTypes", type).select();
+            var typeCartridges = jlinq.from(config.cartridges).contains("types", type).select();
             return typeCartridges;
         };
 
-        cartridgeService.getShotgunCartridges = function ()
+        cartridgeService.getShotgunCartridges = function (config)
         {
-            var config = loadService.config;
             
              if (config.shotgunCartridges)
             {
@@ -22,43 +19,38 @@ app.factory('cartridgeService', ['loadService', function (loadService) {
             }
             else
             {
-                config.shotgunCartridges = getCartridgesByType('Shotgun');
+                config.shotgunCartridges = getCartridgesByType(config, 'Shotgun');
                 return config.shotgunCartridges;
             }
             
         };
         
-        cartridgeService.getPistolCartridges = function ()
+        cartridgeService.getPistolCartridges = function (config)
         {
-            var config = loadService.config;
              if (config.pistolCartridges)
             {
                 return config.pistolCartridges;
             }
             else
             {
-                config.pistolCartridges = getCartridgesByType('Pistol');
+                config.pistolCartridges = getCartridgesByType(config, 'Pistol');
                 return config.pistolCartridges;
             }
         };
         
-        cartridgeService.getRifleCartridges = function ()
+        cartridgeService.getRifleCartridges = function (config)
         {
-            var config = loadService.config;
              if (config.rifleCartridges)
             {
                 return config.rifleCartridges;
             }
             else
             {
-                config.rifleCartridges = getCartridgesByType('Rifle');
+                config.rifleCartridges = getCartridgesByType(config, 'Rifle');
                 return config.rifleCartridges;
             }
         };
-        
-        
-        
-        
+
         return cartridgeService;
     }]);
 

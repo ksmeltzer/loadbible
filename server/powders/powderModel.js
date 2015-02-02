@@ -8,7 +8,7 @@ var arrayUtil = require('../shared/util/arrayUtil.js');
  var PowderSchema = mongoose.Schema({
       manufacturer : {type: String, required: true},
       name : {type: String, required: true},
-      type : [String] //[Shotgun, Rifle, Pistol]
+      types : [String] //[Shotgun, Rifle, Pistol]
      }, db.getSchemaOptions());
 
 PowderSchema.virtual('id')

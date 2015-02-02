@@ -60,7 +60,8 @@ module.exports.getConfig = function()
        gunModel.getGunTypes(), 
        shotgunModel.getChokes(),
         cartridgeModel.getCartridges(),
-        shotgunModel.getChamberLengths()
+        shotgunModel.getChamberLengths(),
+        shotgunModel.getShot()
        ]).then(function(a){
 
          deferred.resolve({
@@ -75,7 +76,8 @@ module.exports.getConfig = function()
              gunTypes: a[8], 
              chokes: a[9],
              cartridges : a[10],
-             chamberLengths : a[11]
+             chamberLengths : a[11],
+             shot : a[12]
          });
     }); 
     

@@ -7,16 +7,17 @@ app.controller('gunEntryModalCtrl', function ($scope, $rootScope, $modalInstance
     $scope.currentSelectedManufacturer = {};
     $scope.currentSelectedManufacturer.models = [];
 
+    $rootScope.$on(loadService.events.CONFIG_LOADED, function(event, config){
+        scope.config = config;
+        $scope.gunManufacturerList = gunService.manufacturers.get(config);
+        $scope.shotgunCartridges = cartridgeService.getShotgunCartridges(config);
+        $scope.pistolCartridges = cartridgeService.getPistolCartridges(config);
+        $scope.rifleCartridges = cartridgeService.getRifleCartridges(config);
+     });
+     loadService.requestConfig();
 
-    var config = loadService.config;
-
-    var gunManufacturerList = gunService.manufacturers.get();
     
-    var shotgunCartridges = cartridgeService.getShotgunCartridges();
-    
-    var pistolCartridges = cartridgeService.getPistolCartridges();
-    
-    var rifleCartridges = cartridgeService.getRifleCartridges();
+   
     
     $scope.config = config;
     $scope.gunManufacturerList = gunManufacturerList;

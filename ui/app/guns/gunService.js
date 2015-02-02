@@ -42,10 +42,8 @@ app.factory('gunService', ['$rootScope', '$http', 'userService', 'loadService', 
         }
     };
     
-    service.manufacturers.get = function()
-    {
-      var config = loadService.config;
-      
+    service.manufacturers.get = function(config)
+    { 
       if(config.gunManufacturers)
       {
           return config.gunManufacturers;

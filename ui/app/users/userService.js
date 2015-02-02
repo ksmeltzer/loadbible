@@ -2,8 +2,8 @@
 
 var app = angular.module('myApp');
 
-app.factory('userService', ['$http', '$rootScope',
-    function ($http, $rootScope)
+app.factory('userService', ['$http', '$rootScope', '$location',
+    function ($http, $rootScope, $location)
     {
 
         $http.defaults.headers.common.Authorization = 'Basic YmVlcDpib29w';
@@ -20,6 +20,10 @@ app.factory('userService', ['$http', '$rootScope',
 
         service.eventNames.GUN_ADDED_TO_USER = "userService.eventNames.GUN_ADDED_TO_USER";
         service.eventNames.GUN_REMOVED_FROM_USER = "userService.eventNames.GUN_REMOVED_FROM_USER";
+        
+        service.urls = {};
+        
+        service.urls.CONFIRM_REGISTRATION =  "/user/register/confirm";
 
 
 
@@ -112,6 +116,12 @@ app.factory('userService', ['$http', '$rootScope',
                 });
             }
         }
+        
+        service.register = function(user)
+        {
+            service.save(user);
+            $location.url(service.urls.CONFIRM_REGISTRATION);
+        };
 
 
 

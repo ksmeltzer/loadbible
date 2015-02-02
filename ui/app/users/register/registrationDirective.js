@@ -15,7 +15,10 @@
 
                     scope.registerUser = function()
                     {
-                        userService.save(scope.user);
+                        userService.register(scope.user);
+                        //TODO deal with error conditions
+                       
+                        
                     };
 
                 }

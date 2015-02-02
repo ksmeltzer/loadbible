@@ -4,7 +4,7 @@ var q = require('q');
 
 var CartridgeSchema = mongoose.Schema({
     name: {type: String, required: true, unique: true},
-    gunTypes: [{type: String}],
+    types: [{type: String}],
     approved : {type: Boolean, required: true, default: false}
 }, db.getSchemaOptions());
 

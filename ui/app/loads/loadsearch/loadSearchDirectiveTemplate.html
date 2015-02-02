@@ -1,0 +1,44 @@
+<div class="modal-header">
+    <h3 class="modal-title">Search Loads</h3>
+</div>
+<div class="modal-body">
+    <form name='loadSearchForm'>
+        <div class="form-group">
+            <h3>Gun Type</h3>
+            <div class="input-group">
+                <label>Gun Loads</label>
+                <select class="form-control" name='type' ng-model="loadSearch.type" ng-options="val for val in config.gunTypes">
+                </select>
+            </div>
+            <div class="input-group">
+                <label ng-if="loadSearch.type == 'Shotgun'">Gauge</label>
+                <label ng-if="loadSearch.type == 'Rifle' || loadSearch.type == 'Pistol'">Caliber</label>
+                <select ng-if="loadSearch.type == 'Shotgun'" class="form-control" ng-model="loadSearch.cartridgeSize" ng-options="opt.name for opt in shotgunCartridges"></select>
+                <select ng-if="loadSearch.type == 'Rifle'" class="form-control" ng-model="loadSearch.cartridgeSize" ng-options="opt.name for opt in rifleCartridges"></select>
+                <select ng-if="loadSearch.type == 'Pistol'" class="form-control" ng-model="loadSearch.cartridgeSize" ng-options="opt.name for opt in pistolCartridges"></select>
+            </div>
+        </div>
+        
+        
+        <div class="form-group">
+            <h3>Powder</h3>
+            <div class="input-group" >
+                <label>Powder Manufacturer</label>
+                <select class="form-control" name='type' ng-model="loadSearch.powderManufacturer" ng-options="powderManufacturer.name for powderManufacturer  in getPowders()">
+                </select>
+            </div>
+            
+            <div class="input-group">
+                <label>Powder Name</label>
+                <select  class="form-control" ng-model="loadSearch.powder" ng-options="opt.name for opt in loadSearch.powderManufacturer.powders"></select>
+            </div>
+        </div>
+        
+    </form>
+
+    
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="ok()">Search</button>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>
