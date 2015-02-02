@@ -17,12 +17,12 @@
                     <td>{{row.model}}</td>
                     <td>{{row.type}}</td>
                      <td>
-                         <span ng-if="row.type == 'Shotgun'">{{row.cartridgeSize}} Gauge,</span>
-                         <span ng-if="row.type != 'Shotgun'">{{row.cartridgeSize}} Caliber,</span>
-                          <span ng-if="row.chamberLength">{{row.chamberLength}} Inch Chamber Length,</span>
-                          <span ng-if="row.choke">{{row.choke}} Choke ,</span>
-                          <span ng-if="row.twistRate">{{row.twistRate}} Twist Rate,</span>
-                          <span ng-if="row.barrelLength">{{row.barrelLength}} Inch Barrel</span>
+                         <span ng-if="row.type == 'Shotgun'">{{row.cartridgeSize}}</span>
+                         <span ng-if="row.type != 'Shotgun'">{{row.cartridgeSize}}</span>
+                          <span ng-if="row.chamberLength">,  {{row.chamberLength}} Inch Chamber Length</span>
+                          <span ng-if="row.choke">,  {{row.choke}} Choke</span>
+                          <span ng-if="row.twistRate">,  {{row.twistRate}} Twist Rate</span>
+                          <span ng-if="row.barrelLength">,  {{row.barrelLength}} Inch Barrel</span>
                           
                     </td>
                     <td>

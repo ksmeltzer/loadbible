@@ -42,7 +42,7 @@ module.exports.getTwistRates = function()
 {
     var deferred = q.defer();
     var rates = [];
-    for(var x = 0; x < 39; x++)
+    for(var x = 7; x < 39; x++)
     {
         if(x > 0)
         {

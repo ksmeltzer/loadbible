@@ -14,16 +14,20 @@ app.controller('gunEntryModalCtrl', function ($scope, $rootScope, $modalInstance
     
     var shotgunCartridges = cartridgeService.getShotgunCartridges();
     
+    var pistolCartridges = cartridgeService.getPistolCartridges();
+    
+    var rifleCartridges = cartridgeService.getRifleCartridges();
+    
     $scope.config = config;
     $scope.gunManufacturerList = gunManufacturerList;
     $scope.shotgunCartridges = shotgunCartridges;
+    $scope.pistolCartridges = pistolCartridges;
+    $scope.rifleCartridges = rifleCartridges;
+    
     
 
     $scope.editGun = {};
     $scope.editGun.fields = [];
-
-    //gunService.requestGunConfig();
-
 
     $scope.ok = function () {
         $modalInstance.close($scope.editGun);

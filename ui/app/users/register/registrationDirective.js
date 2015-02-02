@@ -16,9 +16,9 @@
                     scope.registerUser = function()
                     {
                         userService.save(scope.user);
-                    }
+                    };
 
                 }
 
-            }
+            };
         }]);

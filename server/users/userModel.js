@@ -19,9 +19,11 @@ var UserSchema = mongoose.Schema({
     hash: {type: String,required: true},
     salt: {type: String, required: true},
     guns: [{
-            model: {type: mongoose.Schema.Types.ObjectId, ref: 'gun.models'},
+            manufacturer: {type: String, required: true},
+            model: {type: String, required: true},
+            type: {type: String, required: true},
             cartridgeSize : {type: String, required: true},
-            barrelLength : {type: String},
+            barrelLength : {type: Number},
             //shotgun specific fields
             choke: {type: String},
             chamberLength: {type: Number},
@@ -41,3 +43,5 @@ UserSchema.virtual('id')
 
 module.exports.UserSchema = UserSchema;
 module.exports.User = User;
+
+

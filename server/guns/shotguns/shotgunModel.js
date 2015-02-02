@@ -81,3 +81,11 @@ module.exports.getChokes = function()
     deferred.resolve(chokes);
     return deferred.promise;
 };
+
+module.exports.getChamberLengths = function()
+{
+    var deferred = q.defer();
+    var chamberLengths = [2, 2.5, 2.75, 3, 3.5];
+    deferred.resolve(chamberLengths);
+    return deferred.promise;
+};
