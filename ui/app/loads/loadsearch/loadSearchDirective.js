@@ -11,8 +11,11 @@ app.directive('loadSearchDirective', ['loadService', '$rootScope', 'gunService',
             templateUrl: '/app/loads/loadsearch/loadSearchDirectiveTemplate.html',
             link: function (scope)
             {
-                scope.loadSearch = {};
+                scope.loadSearch = {type: ''};
+
                 scope.loadSearch.powder = {};
+                scope.powderInputsCollapsed = true;
+                scope.cartridgeInputsCollapsed = true;
                 $rootScope.$on(loadService.events.CONFIG_LOADED, function (event, config) {
                     scope.config = config;
                     scope.gunManufacturerList = gunService.manufacturers.get(config);
@@ -28,6 +31,33 @@ app.directive('loadSearchDirective', ['loadService', '$rootScope', 'gunService',
                 loadService.requestConfig();
                 
                 
+                scope.$watch('loadSearch.cartridgeSize', function(newValue, oldValue) {
+
+                  if(scope.loadSearch.type == "Shotgun")
+                  {
+                      scope.HullsList = gunService.shotgun.hulls.getByGauge(newValue.name, scope.config);
+                  }
+
+                  return newValue;
+
+                });
+
+                 scope.$watch('loadSearch.chamberLength', function(newValue, oldValue) {
+
+                  if(scope.loadSearch.type == "Shotgun")
+                  {
+                      if(scope.loadSearch.cartridgeSize)
+                      {
+                        scope.HullsList = gunService.shotgun.hulls.getByChamberLength(scope.loadSearch.cartridgeSize.name, newValue, scope.config);
+                    }
+                  }
+
+                  return newValue;
+
+                });
+
+
+
                 scope.getPowders = function()
                 {
                     switch(scope.loadSearch.type)

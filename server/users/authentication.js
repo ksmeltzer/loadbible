@@ -20,7 +20,7 @@ passport.use(new TokenStrategy(
        var md = forge.md.sha512.create();
        md.update(token + user.salt);
        var hashToCheck = md.digest().toHex();
-       if(hashToCheck == user.hash)
+       if(hashToCheck === user.hash)
        {
             return callback(null, user);
        }
@@ -44,4 +44,4 @@ exports.hashUserPassword = function(user)
     md.update(hash + user.salt);
     user.hash = md.digest().toHex();
     delete  user.clientHash;
-}
+};

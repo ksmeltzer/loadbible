@@ -29,11 +29,10 @@ var Wad = mongoose.model('gun.shotgun.wads', WadSchema);
 
 var HullSchema = mongoose.Schema({
      manufacturer : {type: String, required: true},
-      name : {type: String, required: true},
       cartridgeSize: {type: String, required: true},
       chamberLength : {type: Number, required: true},
        description: {type: String},
-      approved : {type: Boolean}
+      approved : {type: Boolean, default: false}
 }, db.getSchemaOptions());
 
 

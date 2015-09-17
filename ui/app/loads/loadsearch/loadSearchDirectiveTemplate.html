@@ -4,9 +4,9 @@
 <div class="modal-body">
     <form name='loadSearchForm'>
         <div class="form-group">
-            <h3>Gun Type</h3>
+            <h3>Gun Info</h3>
             <div class="input-group">
-                <label>Gun Loads</label>
+                <label>Gun Type</label>
                 <select class="form-control" name='type' ng-model="loadSearch.type" ng-options="val for val in config.gunTypes">
                 </select>
             </div>
@@ -17,11 +17,17 @@
                 <select ng-if="loadSearch.type == 'Rifle'" class="form-control" ng-model="loadSearch.cartridgeSize" ng-options="opt.name for opt in rifleCartridges"></select>
                 <select ng-if="loadSearch.type == 'Pistol'" class="form-control" ng-model="loadSearch.cartridgeSize" ng-options="opt.name for opt in pistolCartridges"></select>
             </div>
+
+            <div class="input-group" ng-if="loadSearch.type == 'Shotgun'">
+                <label>Chamber Length</label>
+                <select class="form-control" ng-model="loadSearch.chamberLength" ng-options="opt for opt in config.chamberLengths"></select>
+            </div>
         </div>
         
         
         <div class="form-group">
-            <h3>Powder</h3>
+            <h3>Powder <button type="button" class="btn btn-default btn-sm" ng-click="powderInputsCollapsed = !powderInputsCollapsed"><span ng-if="powderInputsCollapsed==true" class="glyphicon glyphicon-plus"></span><span class="glyphicon glyphicon-minus" ng-if="powderInputsCollapsed==false"></span></button></h3>
+            <div ng-if="powderInputsCollapsed==false">
             <div class="input-group" >
                 <label>Powder Manufacturer</label>
                 <select class="form-control" name='type' ng-model="loadSearch.powderManufacturer" ng-options="powderManufacturer.name for powderManufacturer  in getPowders()">
@@ -32,6 +38,24 @@
                 <label>Powder Name</label>
                 <select  class="form-control" ng-model="loadSearch.powder" ng-options="opt.name for opt in loadSearch.powderManufacturer.powders"></select>
             </div>
+            </div>
+        </div>
+
+
+         <div class="form-group" ng-if="loadSearch.type == 'Shotgun'">
+             <h3>Cartridge <button type="button" class="btn btn-default btn-sm" ng-click="cartridgeInputsCollapsed = !cartridgeInputsCollapsed"><span ng-if="cartridgeInputsCollapsed==true" class="glyphicon glyphicon-plus"></span><span class="glyphicon glyphicon-minus" ng-if="cartridgeInputsCollapsed==false"></span></button></h3>
+             <div ng-if="cartridgeInputsCollapsed==false">
+             <div class="input-group" >
+                <label>Hull</label>
+                <select class="form-control" name='type' ng-model="loadSearch.hull" ng-options="hull.name for hull  in HullsList">
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label>Wad/Shot Cup</label>
+                <select  class="form-control" ng-model="loadSearch.powder" ng-options="opt.name for opt in loadSearch.powderManufacturer.powders"></select>
+            </div>
+             </div>
         </div>
         
     </form>
